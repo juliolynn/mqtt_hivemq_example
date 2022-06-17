@@ -1,8 +1,19 @@
 from time import sleep
-import paho.mqtt.client as mqtt
+from dotenv import dotenv_values
+import paho.mqtt.client as paho
+from paho import mqtt
 
-client = mqtt.Client()
-client.connect("localhost", 1883, 60)
+config = dotenv_values(".env")  
+
+client = paho.Client(client_id="", userdata=None, protocol=paho.MQTTv5)
+
+# enable TLS for secure connection
+client.tls_set(tls_version=mqtt.client.ssl.PROTOCOL_TLS)
+# set username and password
+client.username_pw_set(config["USERNAME"], config["PASSWORD"])
+# connect to HiveMQ Cloud on port 8883 (default for MQTT)
+client.connect(config["HOST"], int(config["PORT"]), 60)
+
 client.loop_start()
 
 temp = 0
