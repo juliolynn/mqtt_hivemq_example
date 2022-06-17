@@ -10,7 +10,7 @@ pip install paho-mqtt
 pip install python-dotenv
 ```
 
-(Optiona) Run ngrok to be able to connect from outside of the local network
+(Optional) Run ngrok to be able to connect from outside of the local network
 ```
 ngrok tcp 1883
 ```
